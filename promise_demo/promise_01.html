@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">送Ajax请求</button>
+    <script>
+      // 1. 获取按钮元素
+      let btn = document.querySelector("#btn");
+      // 2.设置点事件
+      btn.onclick = function () {
+        // 3. 创建Ajax实例化对象
+        let xhr = new XMLHttpRequest();
+        // 4. 打开请求
+        xhr.open(
+          "get",
+          "http://iwenwiki.com/api/blueberrypai/getChengpinInfo.php"
+        );
+        // 5. 发送请求
+        xhr.send();
+        // 6. 客户端接受服务器端端响应结果数据
+        xhr.onreadystatechange = function () {
+          // console.log("", xhr.readyState);
+          /*
+           *  2. 已经完成了请求的发送
+           *  3. 响应结果途中，还没有完全响应结果完毕
+           *  4. 已经完全响应完毕结果了
+           */
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              console.log(JSON.parse(xhr.responseText));
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
