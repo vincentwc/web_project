@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 常量一般大写
+      // const PI = 3.1415926;
+      // const G = 9.8;
+      // const A = 1;
+      // const F4 = ['小沈阳','刘能','宋小宝','赵四']
+      // let [xiao,niu,zhao,song] = F4
+      // console.log(xiao,niu,zhao,song);
+
+      const zhao = {
+        name: "赵本山",
+        age: "不详",
+        xiaopin: function () {
+          console.log("我可以演小品");
+        },
+      };
+
+      // let { name, age, xiaopin } = zhao;
+      // console.log(name, age, xiaopin);
+      // 解构赋值
+      let xiaopin = zhao;
+      console.log(xiaopin);
+    </script>
+  </body>
+</html>

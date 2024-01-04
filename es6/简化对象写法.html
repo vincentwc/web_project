@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let name = "张三";
+
+      let change = function () {
+        console.log("aaaa");
+      };
+
+      // 属性与变量名称相同的情况，可以简写
+      const school = {
+        name,
+        change,
+        improve() {
+          console.log("aaa");
+        },
+      };
+    </script>
+  </body>
+</html>
