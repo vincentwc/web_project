@@ -19,8 +19,19 @@
       let s4 = Symbol.for("尚硅谷");
       console.log(s4, typeof s4);
 
-      // USONB
+      let game = { };
 
+      let methpds = {
+        up: Symbol(),
+        down: Symbol(),
+      };
+      game[methpds.up] = function () {
+        console.log("111");
+      };
+      game[methpds.down] = function () {
+        console.log("222");
+      };
+      console.log(game);
     </script>
   </body>
 </html>
