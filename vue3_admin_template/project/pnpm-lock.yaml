@@ -8,6 +8,9 @@ dependencies:
   '@element-plus/icons-vue':
     specifier: ^2.3.1
     version: 2.3.1(vue@3.4.3)
+  axios:
+    specifier: ^1.6.5
+    version: 1.6.5
   element-plus:
     specifier: ^2.4.4
     version: 2.4.4(react@18.2.0)(vue@3.4.3)
@@ -55,6 +58,9 @@ devDependencies:
   husky:
     specifier: ^8.0.0
     version: 8.0.3
+  mockjs:
+    specifier: ^1.1.0
+    version: 1.1.0
   postcss:
     specifier: ^8.4.33
     version: 8.4.33
@@ -106,6 +112,9 @@ devDependencies:
   vite:
     specifier: ^4.4.5
     version: 4.5.1(@types/node@18.19.4)(sass@1.69.6)
+  vite-plugin-mock:
+    specifier: 2.9.8
+    version: 2.9.8(mockjs@1.1.0)(vite@4.5.1)
   vite-plugin-svg-icons:
     specifier: ^2.0.1
     version: 2.0.1(vite@4.5.1)
@@ -630,6 +639,15 @@ packages:
     dev: true
     optional: true
 
+  /@esbuild/linux-loong64@0.14.54:
+    resolution: {integrity: sha1-3ipL5ni9TQ0f+7hubed5zeWZkCg=, tarball: http://npm.cestc.cn/@esbuild/linux-loong64/download/@esbuild/linux-loong64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [loong64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /@esbuild/linux-loong64@0.18.20:
     resolution: {integrity: sha1-5vzLeqwXjdL/uYYEZayJ1/I7l30=, tarball: http://npm.cestc.cn/@esbuild/linux-loong64/download/@esbuild/linux-loong64-0.18.20.tgz}
     engines: {node: '>=12'}
@@ -942,6 +960,10 @@ packages:
 
   /@types/minimist@1.2.4:
     resolution: {integrity: sha1-gfiGeGQRxFu6PzPngatIvVa/yi4=, tarball: http://npm.cestc.cn/@types/minimist/download/@types/minimist-1.2.4.tgz}
+    dev: true
+
+  /@types/mockjs@1.0.9:
+    resolution: {integrity: sha1-VFZ6C0fhKe64iNRVCDAYYbiYhL4=, tarball: http://npm.cestc.cn/@types/mockjs/download/@types/mockjs-1.0.9.tgz}
     dev: true
 
   /@types/node@18.19.4:
@@ -1575,6 +1597,10 @@ packages:
     resolution: {integrity: sha1-yW6jMypSFpnQr6rO7VEKVGVsYzk=, tarball: http://npm.cestc.cn/async-validator/download/async-validator-4.2.5.tgz}
     dev: false
 
+  /asynckit@0.4.0:
+    resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=, tarball: http://npm.cestc.cn/asynckit/download/asynckit-0.4.0.tgz}
+    dev: false
+
   /atob@2.1.2:
     resolution: {integrity: sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=, tarball: http://npm.cestc.cn/atob/download/atob-2.1.2.tgz}
     engines: {node: '>= 4.5.0'}
@@ -1585,6 +1611,16 @@ packages:
     resolution: {integrity: sha1-kvlWFlAQadB9EO2y/DfT4cZRI7c=, tarball: http://npm.cestc.cn/available-typed-arrays/download/available-typed-arrays-1.0.5.tgz}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /axios@1.6.5:
+    resolution: {integrity: sha1-LAkNoUruqzdwrTDDoUYbyXD7DNg=, tarball: http://npm.cestc.cn/axios/download/axios-1.6.5.tgz}
+    dependencies:
+      follow-redirects: 1.15.4
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha1-6D46fj8wCzTLnYf2FfoMvzV2kO4=, tarball: http://npm.cestc.cn/balanced-match/download/balanced-match-1.0.2.tgz}
@@ -1847,6 +1883,13 @@ packages:
     resolution: {integrity: sha1-T4zpGd5Fbx1cHDaMMH/iDz5Z+0M=, tarball: http://npm.cestc.cn/colord/download/colord-2.9.3.tgz}
     dev: true
 
+  /combined-stream@1.0.8:
+    resolution: {integrity: sha1-w9RaizT9cwYxoRCoolIGgrMdWn8=, tarball: http://npm.cestc.cn/combined-stream/download/combined-stream-1.0.8.tgz}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      delayed-stream: 1.0.0
+    dev: false
+
   /commander@2.20.3:
     resolution: {integrity: sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=, tarball: http://npm.cestc.cn/commander/download/commander-2.20.3.tgz}
     dev: true
@@ -1873,6 +1916,18 @@ packages:
 
   /concat-map@0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=, tarball: http://npm.cestc.cn/concat-map/download/concat-map-0.0.1.tgz}
+    dev: true
+
+  /connect@3.7.0:
+    resolution: {integrity: sha1-XUk0iRDKpeB6AYALAw0MNfIEhPg=, tarball: http://npm.cestc.cn/connect/download/connect-3.7.0.tgz}
+    engines: {node: '>= 0.10.0'}
+    dependencies:
+      debug: 2.6.9
+      finalhandler: 1.1.2
+      parseurl: 1.3.3
+      utils-merge: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /conventional-changelog-angular@7.0.0:
@@ -2156,6 +2211,11 @@ packages:
       isobject: 3.0.1
     dev: true
 
+  /delayed-stream@1.0.0:
+    resolution: {integrity: sha1-3zrhmayt+31ECqrgsp4icrJOxhk=, tarball: http://npm.cestc.cn/delayed-stream/download/delayed-stream-1.0.0.tgz}
+    engines: {node: '>=0.4.0'}
+    dev: false
+
   /dir-glob@3.0.1:
     resolution: {integrity: sha1-Vtv3PZkqSpO6FYT0U0Bj/S5BcX8=, tarball: http://npm.cestc.cn/dir-glob/download/dir-glob-3.0.1.tgz}
     engines: {node: '>=8'}
@@ -2258,6 +2318,10 @@ packages:
       is-obj: 2.0.0
     dev: true
 
+  /ee-first@1.1.1:
+    resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=, tarball: http://npm.cestc.cn/ee-first/download/ee-first-1.1.1.tgz}
+    dev: true
+
   /electron-to-chromium@1.4.622:
     resolution: {integrity: sha1-kl2LImSrvL4mSppikNl7nloa8gU=, tarball: http://npm.cestc.cn/electron-to-chromium/download/electron-to-chromium-1.4.622.tgz}
     dev: true
@@ -2295,6 +2359,11 @@ packages:
   /emojis-list@3.0.0:
     resolution: {integrity: sha1-VXBmIEatKeLpFucariYKvf9Pang=, tarball: http://npm.cestc.cn/emojis-list/download/emojis-list-3.0.0.tgz}
     engines: {node: '>= 4'}
+    dev: true
+
+  /encodeurl@1.0.2:
+    resolution: {integrity: sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=, tarball: http://npm.cestc.cn/encodeurl/download/encodeurl-1.0.2.tgz}
+    engines: {node: '>= 0.8'}
     dev: true
 
   /enhanced-resolve@5.15.0:
@@ -2401,6 +2470,215 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
+  /esbuild-android-64@0.14.54:
+    resolution: {integrity: sha1-UF9BgyiEMTu6/7J3BLi8qi2GFr4=, tarball: http://npm.cestc.cn/esbuild-android-64/download/esbuild-android-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-android-arm64@0.14.54:
+    resolution: {integrity: sha1-jOadfKuklkbgCZaP5XVKIamHF3E=, tarball: http://npm.cestc.cn/esbuild-android-arm64/download/esbuild-android-arm64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-darwin-64@0.14.54:
+    resolution: {integrity: sha1-JLpnuajLiQo8CNkBj4h8wiHN2iU=, tarball: http://npm.cestc.cn/esbuild-darwin-64/download/esbuild-darwin-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-darwin-arm64@0.14.54:
+    resolution: {integrity: sha1-P3zbeIiO4F5IjSUKK9qrH6Zxv3M=, tarball: http://npm.cestc.cn/esbuild-darwin-arm64/download/esbuild-darwin-arm64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-freebsd-64@0.14.54:
+    resolution: {integrity: sha1-CSUPmXpW7UZQ8+GXnJBf/EC76U0=, tarball: http://npm.cestc.cn/esbuild-freebsd-64/download/esbuild-freebsd-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-freebsd-arm64@0.14.54:
+    resolution: {integrity: sha1-uvtG7QT8X5fL2wFthpR6eVefjkg=, tarball: http://npm.cestc.cn/esbuild-freebsd-arm64/download/esbuild-freebsd-arm64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-32@0.14.54:
+    resolution: {integrity: sha1-4qjEqO/cNVQFMlAz/OvrlB94H+U=, tarball: http://npm.cestc.cn/esbuild-linux-32/download/esbuild-linux-32-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [ia32]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-64@0.14.54:
+    resolution: {integrity: sha1-3l/boclWZs9yNp9StAsDvnEiZlI=, tarball: http://npm.cestc.cn/esbuild-linux-64/download/esbuild-linux-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-arm64@0.14.54:
+    resolution: {integrity: sha1-2uTNQq6Xh0aLalwVjaTIToOwzos=, tarball: http://npm.cestc.cn/esbuild-linux-arm64/download/esbuild-linux-arm64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-arm@0.14.54:
+    resolution: {integrity: sha1-osHf9tDyHb6PxpmKEiZ1Uz3fzVk=, tarball: http://npm.cestc.cn/esbuild-linux-arm/download/esbuild-linux-arm-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-mips64le@0.14.54:
+    resolution: {integrity: sha1-2ZGOnky5cvjW2ujoZVv57hMe2jQ=, tarball: http://npm.cestc.cn/esbuild-linux-mips64le/download/esbuild-linux-mips64le-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [mips64el]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-ppc64le@0.14.54:
+    resolution: {integrity: sha1-P5oPbUEHP7GmQGgIRcfeUplfE34=, tarball: http://npm.cestc.cn/esbuild-linux-ppc64le/download/esbuild-linux-ppc64le-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [ppc64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-riscv64@0.14.54:
+    resolution: {integrity: sha1-YYhTwCgXimGDe8eZ0gE9RpXkUcg=, tarball: http://npm.cestc.cn/esbuild-linux-riscv64/download/esbuild-linux-riscv64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [riscv64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-linux-s390x@0.14.54:
+    resolution: {integrity: sha1-0YhcTFp2u7Wg/hguLIxg654p8qY=, tarball: http://npm.cestc.cn/esbuild-linux-s390x/download/esbuild-linux-s390x-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [s390x]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-netbsd-64@0.14.54:
+    resolution: {integrity: sha1-aa6Rei/yQbffHb8iuvBL0zA0noE=, tarball: http://npm.cestc.cn/esbuild-netbsd-64/download/esbuild-netbsd-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [netbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-openbsd-64@0.14.54:
+    resolution: {integrity: sha1-20yElSh6NQpnkN4i7eokelfF1Hs=, tarball: http://npm.cestc.cn/esbuild-openbsd-64/download/esbuild-openbsd-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [openbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-sunos-64@0.14.54:
+    resolution: {integrity: sha1-VCh+49pz04RLchwhvIDB3H4b99o=, tarball: http://npm.cestc.cn/esbuild-sunos-64/download/esbuild-sunos-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [sunos]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-32@0.14.54:
+    resolution: {integrity: sha1-+Kr5pWZ2MLQPD7OqN78Bu9NAzjE=, tarball: http://npm.cestc.cn/esbuild-windows-32/download/esbuild-windows-32-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-64@0.14.54:
+    resolution: {integrity: sha1-v1S1G9PpsPGIb/2yJKQXYDHqCvQ=, tarball: http://npm.cestc.cn/esbuild-windows-64/download/esbuild-windows-64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild-windows-arm64@0.14.54:
+    resolution: {integrity: sha1-k30VZ1oV5LDk+v26o6Aad2or6YI=, tarball: http://npm.cestc.cn/esbuild-windows-arm64/download/esbuild-windows-arm64-0.14.54.tgz}
+    engines: {node: '>=12'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /esbuild@0.14.54:
+    resolution: {integrity: sha1-i0Tc8rDxpm/CJFmUPcz0d1NemqI=, tarball: http://npm.cestc.cn/esbuild/download/esbuild-0.14.54.tgz}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      '@esbuild/linux-loong64': 0.14.54
+      esbuild-android-64: 0.14.54
+      esbuild-android-arm64: 0.14.54
+      esbuild-darwin-64: 0.14.54
+      esbuild-darwin-arm64: 0.14.54
+      esbuild-freebsd-64: 0.14.54
+      esbuild-freebsd-arm64: 0.14.54
+      esbuild-linux-32: 0.14.54
+      esbuild-linux-64: 0.14.54
+      esbuild-linux-arm: 0.14.54
+      esbuild-linux-arm64: 0.14.54
+      esbuild-linux-mips64le: 0.14.54
+      esbuild-linux-ppc64le: 0.14.54
+      esbuild-linux-riscv64: 0.14.54
+      esbuild-linux-s390x: 0.14.54
+      esbuild-netbsd-64: 0.14.54
+      esbuild-openbsd-64: 0.14.54
+      esbuild-sunos-64: 0.14.54
+      esbuild-windows-32: 0.14.54
+      esbuild-windows-64: 0.14.54
+      esbuild-windows-arm64: 0.14.54
+    dev: true
+
   /esbuild@0.18.20:
     resolution: {integrity: sha1-Rwn1o0gBtDt5mrfW2C9yhKm3p6Y=, tarball: http://npm.cestc.cn/esbuild/download/esbuild-0.18.20.tgz}
     engines: {node: '>=12'}
@@ -2438,7 +2716,6 @@ packages:
 
   /escape-html@1.0.3:
     resolution: {integrity: sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=, tarball: http://npm.cestc.cn/escape-html/download/escape-html-1.0.3.tgz}
-    dev: false
 
   /escape-string-regexp@1.0.5:
     resolution: {integrity: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=, tarball: http://npm.cestc.cn/escape-string-regexp/download/escape-string-regexp-1.0.5.tgz}
@@ -2879,6 +3156,21 @@ packages:
       to-regex-range: 5.0.1
     dev: true
 
+  /finalhandler@1.1.2:
+    resolution: {integrity: sha1-t+fQAP/RGTjQ/bBTUG9uur6fWH0=, tarball: http://npm.cestc.cn/finalhandler/download/finalhandler-1.1.2.tgz}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      debug: 2.6.9
+      encodeurl: 1.0.2
+      escape-html: 1.0.3
+      on-finished: 2.3.0
+      parseurl: 1.3.3
+      statuses: 1.5.0
+      unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /find-up@4.1.0:
     resolution: {integrity: sha1-l6/n1s3AvFkoWEt8jXsW6KmqXRk=, tarball: http://npm.cestc.cn/find-up/download/find-up-4.1.0.tgz}
     engines: {node: '>=8'}
@@ -2908,6 +3200,16 @@ packages:
     resolution: {integrity: sha1-frTGfKG6NCMsqdLZPpiG5hGtfa8=, tarball: http://npm.cestc.cn/flatted/download/flatted-3.2.9.tgz}
     dev: true
 
+  /follow-redirects@1.15.4:
+    resolution: {integrity: sha1-zcfTCL9kkxJrF+ohkeoMzz5TWt8=, tarball: http://npm.cestc.cn/follow-redirects/download/follow-redirects-1.15.4.tgz}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /for-each@0.3.3:
     resolution: {integrity: sha1-abRH6IoKXTLD5whPPxcQA0shN24=, tarball: http://npm.cestc.cn/for-each/download/for-each-0.3.3.tgz}
     dependencies:
@@ -2918,6 +3220,15 @@ packages:
     resolution: {integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=, tarball: http://npm.cestc.cn/for-in/download/for-in-1.0.2.tgz}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /form-data@4.0.0:
+    resolution: {integrity: sha1-k5Gdrq82HuUpWEubMWZNwSyfpFI=, tarball: http://npm.cestc.cn/form-data/download/form-data-4.0.0.tgz}
+    engines: {node: '>= 6'}
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
+    dev: false
 
   /fragment-cache@0.2.1:
     resolution: {integrity: sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=, tarball: http://npm.cestc.cn/fragment-cache/download/fragment-cache-0.2.1.tgz}
@@ -3982,14 +4293,12 @@ packages:
   /mime-db@1.52.0:
     resolution: {integrity: sha1-u6vNwChZ9JhzAchW4zh85exDv3A=, tarball: http://npm.cestc.cn/mime-db/download/mime-db-1.52.0.tgz}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /mime-types@2.1.35:
     resolution: {integrity: sha1-OBqHG2KnNEUGYK497uRIE/cNlZo=, tarball: http://npm.cestc.cn/mime-types/download/mime-types-2.1.35.tgz}
     engines: {node: '>= 0.6'}
     dependencies:
       mime-db: 1.52.0
-    dev: true
 
   /mimic-fn@2.1.0:
     resolution: {integrity: sha1-ftLCzMyvhNP/y3pptXcR/CCDQBs=, tarball: http://npm.cestc.cn/mimic-fn/download/mimic-fn-2.1.0.tgz}
@@ -4038,6 +4347,13 @@ packages:
     dependencies:
       for-in: 1.0.2
       is-extendable: 1.0.1
+    dev: true
+
+  /mockjs@1.1.0:
+    resolution: {integrity: sha1-5qDDeOkZBtuv8gkRzAJzs8fXWwY=, tarball: http://npm.cestc.cn/mockjs/download/mockjs-1.1.0.tgz}
+    hasBin: true
+    dependencies:
+      commander: 7.2.0
     dev: true
 
   /ms@2.0.0:
@@ -4210,6 +4526,13 @@ packages:
       es-abstract: 1.22.3
     dev: true
 
+  /on-finished@2.3.0:
+    resolution: {integrity: sha1-IPEzZIGwg811M3mSoWlxqi2QaUc=, tarball: http://npm.cestc.cn/on-finished/download/on-finished-2.3.0.tgz}
+    engines: {node: '>= 0.8'}
+    dependencies:
+      ee-first: 1.1.1
+    dev: true
+
   /once@1.4.0:
     resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=, tarball: http://npm.cestc.cn/once/download/once-1.4.0.tgz}
     dependencies:
@@ -4302,6 +4625,11 @@ packages:
       lines-and-columns: 1.2.4
     dev: true
 
+  /parseurl@1.3.3:
+    resolution: {integrity: sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=, tarball: http://npm.cestc.cn/parseurl/download/parseurl-1.3.3.tgz}
+    engines: {node: '>= 0.8'}
+    dev: true
+
   /pascalcase@0.1.1:
     resolution: {integrity: sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=, tarball: http://npm.cestc.cn/pascalcase/download/pascalcase-0.1.1.tgz}
     engines: {node: '>=0.10.0'}
@@ -4333,6 +4661,10 @@ packages:
 
   /path-parse@1.0.7:
     resolution: {integrity: sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=, tarball: http://npm.cestc.cn/path-parse/download/path-parse-1.0.7.tgz}
+    dev: true
+
+  /path-to-regexp@6.2.1:
+    resolution: {integrity: sha1-1Uk01nmOueXvFOeveWLJRZBpGOU=, tarball: http://npm.cestc.cn/path-to-regexp/download/path-to-regexp-6.2.1.tgz}
     dev: true
 
   /path-type@4.0.0:
@@ -4500,6 +4832,10 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dev: true
+
+  /proxy-from-env@1.1.0:
+    resolution: {integrity: sha1-4QLxbKNVQkhldV0sno6k8k1Yw+I=, tarball: http://npm.cestc.cn/proxy-from-env/download/proxy-from-env-1.1.0.tgz}
+    dev: false
 
   /punycode@2.3.1:
     resolution: {integrity: sha1-AnQi4vrsCyXhVJw+G9gwm5EztuU=, tarball: http://npm.cestc.cn/punycode/download/punycode-2.3.1.tgz}
@@ -4977,6 +5313,11 @@ packages:
     dependencies:
       define-property: 0.2.5
       object-copy: 0.1.0
+    dev: true
+
+  /statuses@1.5.0:
+    resolution: {integrity: sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=, tarball: http://npm.cestc.cn/statuses/download/statuses-1.5.0.tgz}
+    engines: {node: '>= 0.6'}
     dev: true
 
   /strict-uri-encode@1.1.0:
@@ -5584,6 +5925,11 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
+  /unpipe@1.0.0:
+    resolution: {integrity: sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=, tarball: http://npm.cestc.cn/unpipe/download/unpipe-1.0.0.tgz}
+    engines: {node: '>= 0.8'}
+    dev: true
+
   /unset-value@1.0.0:
     resolution: {integrity: sha1-g3aHP30jNRef+x5vw6jtDfyKtVk=, tarball: http://npm.cestc.cn/unset-value/download/unset-value-1.0.0.tgz}
     engines: {node: '>=0.10.0'}
@@ -5628,6 +5974,11 @@ packages:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=, tarball: http://npm.cestc.cn/util-deprecate/download/util-deprecate-1.0.2.tgz}
     dev: true
 
+  /utils-merge@1.0.1:
+    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=, tarball: http://npm.cestc.cn/utils-merge/download/utils-merge-1.0.1.tgz}
+    engines: {node: '>= 0.4.0'}
+    dev: true
+
   /validate-npm-package-license@3.0.4:
     resolution: {integrity: sha1-/JH2uce6FchX9MssXe/uw51PQQo=, tarball: http://npm.cestc.cn/validate-npm-package-license/download/validate-npm-package-license-3.0.4.tgz}
     dependencies:
@@ -5638,6 +5989,27 @@ packages:
   /vary@1.1.2:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=, tarball: http://npm.cestc.cn/vary/download/vary-1.1.2.tgz}
     engines: {node: '>= 0.8'}
+    dev: true
+
+  /vite-plugin-mock@2.9.8(mockjs@1.1.0)(vite@4.5.1):
+    resolution: {integrity: sha1-EVqxXyo+xrIO8IJKV+GVhrwbqiQ=, tarball: http://npm.cestc.cn/vite-plugin-mock/download/vite-plugin-mock-2.9.8.tgz}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      mockjs: '>=1.1.0'
+      vite: '>=2.0.0'
+    dependencies:
+      '@types/mockjs': 1.0.9
+      chalk: 4.1.2
+      chokidar: 3.5.3
+      connect: 3.7.0
+      debug: 4.3.4
+      esbuild: 0.14.54
+      fast-glob: 3.3.2
+      mockjs: 1.1.0
+      path-to-regexp: 6.2.1
+      vite: 4.5.1(@types/node@18.19.4)(sass@1.69.6)
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-svg-icons@2.0.1(vite@4.5.1):

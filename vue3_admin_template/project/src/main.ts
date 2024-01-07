@@ -22,6 +22,20 @@ import globalComponent from '@/components'
 // 安装自定义插件
 app.use(globalComponent)
 
+// 引入模板全局样式
+import '@/styles/index.scss'
+
+// 测试代码，测试假接口能否使用
+// import axios from 'axios'
+// axios({
+//   url: '/api/user/login',
+//   method: 'post',
+//   data: {
+//     username: 'admin',
+//     password: '111111',
+//   },
+// })
+
 // 挂载
 app.mount('#app')
 
