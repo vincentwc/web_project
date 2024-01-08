@@ -5,6 +5,12 @@ import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 import App from '@/App.vue'
+// 引入模板全局样式
+import '@/styles/index.scss'
+import 'virtual:svg-icons-register'
+import globalComponent from '@/components'
+// 引入路由
+import router from './router'
 
 const app = createApp(App)
 
@@ -12,18 +18,12 @@ app.use(ElementPlus, {
   locale: zhCn,
 })
 
-import 'virtual:svg-icons-register'
-
 // 注册全局组件
 // import SvgIcon from '@/components/SvgIcon/index.vue'
 // app.component('svg-icon', SvgIcon)
 
-import globalComponent from '@/components'
 // 安装自定义插件
 app.use(globalComponent)
-
-// 引入模板全局样式
-import '@/styles/index.scss'
 
 // 测试代码，测试假接口能否使用
 // import axios from 'axios'
@@ -35,6 +35,9 @@ import '@/styles/index.scss'
 //     password: '111111',
 //   },
 // })
+
+// 注册模板路由
+app.use(router)
 
 // 挂载
 app.mount('#app')

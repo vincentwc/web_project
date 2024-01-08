@@ -17,6 +17,9 @@ dependencies:
   vue:
     specifier: ^3.3.4
     version: 3.4.3(typescript@5.3.3)
+  vue-router:
+    specifier: ^4.2.5
+    version: 4.2.5(vue@3.4.3)
 
 devDependencies:
   '@babel/eslint-parser':
@@ -1195,6 +1198,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.4.3
       '@vue/shared': 3.4.3
+
+  /@vue/devtools-api@6.5.1:
+    resolution: {integrity: sha1-f3HzHkCXPu7mW5pkOCsTWT/b1pc=, tarball: http://npm.cestc.cn/@vue/devtools-api/download/@vue/devtools-api-6.5.1.tgz}
+    dev: false
 
   /@vue/language-core@1.8.27(typescript@5.3.3):
     resolution: {integrity: sha1-LKaJLLUk4CSkTlVOTFXXoj5yJj8=, tarball: http://npm.cestc.cn/@vue/language-core/download/@vue/language-core-1.8.27.tgz}
@@ -6099,6 +6106,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-router@4.2.5(vue@3.4.3):
+    resolution: {integrity: sha1-uePgjxvZ6jY/3RcwMmILxQzw6Yo=, tarball: http://npm.cestc.cn/vue-router/download/vue-router-4.2.5.tgz}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.1
+      vue: 3.4.3(typescript@5.3.3)
+    dev: false
 
   /vue-template-compiler@2.7.16:
     resolution: {integrity: sha1-yBstR3UyZMd6wDuZZqRmN0grsDs=, tarball: http://npm.cestc.cn/vue-template-compiler/download/vue-template-compiler-2.7.16.tgz}
