@@ -24,7 +24,7 @@
             <el-button
               class="login_btn"
               type="primary"
-              size="defalut"
+              :loading="loading"
               @click="login"
             >
               登陆
@@ -37,7 +37,16 @@
 </template>
 <script setup lang="ts" name="">
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import useUserStore from '@/store/modules/user'
+import { useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
+// 引入用户相关小仓库
+let useStore = useUserStore()
+// 获取路由器
+let $router = useRouter()
+// 定义变量控制按钮加载效果
+let loading = ref(false)
 // 收集账号和密码数据
 let loginFrom = reactive({
   username: 'admin',
@@ -45,13 +54,33 @@ let loginFrom = reactive({
 })
 
 // 点击按钮回调
-const login = ()=>{
+const login = async () => {
+  loading.value = true
   // 点击按钮干什么
   // 通知仓库发登录请求
   // 请求成功->首页展示数据的地方
   // 请求失败->弹出登录失败信息
-  
-  
+  try {
+    // 保证登陆成功
+    await useStore.userLogin(loginFrom)
+    // 编程式导航跳转到首页
+    $router.push('/')
+    // 登陆成功的提示信息
+    ElNotification({
+      type: 'success',
+      message: '登陆成功',
+    })
+    // 登录成功，加载效果消失
+    loading.value = false
+  } catch (error) {
+    // 登录失败，加载效果消失
+    loading.value = false
+    // 登陆失败的提示信息
+    ElNotification({
+      type: 'error',
+      message: (error as Error).message,
+    })
+  }
 }
 </script>
 <style scoped lang="scss">
