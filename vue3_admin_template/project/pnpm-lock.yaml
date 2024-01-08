@@ -14,6 +14,9 @@ dependencies:
   element-plus:
     specifier: ^2.4.4
     version: 2.4.4(react@18.2.0)(vue@3.4.3)
+  pinia:
+    specifier: ^2.1.7
+    version: 2.1.7(typescript@5.3.3)(vue@3.4.3)
   vue:
     specifier: ^3.3.4
     version: 3.4.3(typescript@5.3.3)
@@ -4690,6 +4693,24 @@ packages:
     resolution: {integrity: sha1-O6ODNzNkbZ0+SZWUbBNlpn+wekI=, tarball: http://npm.cestc.cn/picomatch/download/picomatch-2.3.1.tgz}
     engines: {node: '>=8.6'}
     dev: true
+
+  /pinia@2.1.7(typescript@5.3.3)(vue@3.4.3):
+    resolution: {integrity: sha1-TPVCDZMkygC3tJhNP79pMiIRW7w=, tarball: http://npm.cestc.cn/pinia/download/pinia-2.1.7.tgz}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.5.1
+      typescript: 5.3.3
+      vue: 3.4.3(typescript@5.3.3)
+      vue-demi: 0.14.6(vue@3.4.3)
+    dev: false
 
   /posix-character-classes@0.1.1:
     resolution: {integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=, tarball: http://npm.cestc.cn/posix-character-classes/download/posix-character-classes-0.1.1.tgz}
