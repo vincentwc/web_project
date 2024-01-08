@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Phone(brand, price) {
+        this.brand = brand;
+        this.price = price;
+      }
+
+      Phone.prototype.call = function () {
+        console.log("我可以打电话");
+      };
+
+      let Huiwei = new Phone("华为", 5999);
+      Huiwei.call();
+      console.log(Huiwei);
+
+      class PhoneX {
+        constructor(brand, price) {
+          this.brand = brand;
+          this.price = price;
+        }
+
+        // 方法必须使用该语法，不能使用ES5的对象完整形式
+        call() {
+          console.log("xxx");
+        }
+      }
+
+      let onePlus = new PhoneX("一加", 3999);
+      onePlus.call();
+    </script>
+  </body>
+</html>
