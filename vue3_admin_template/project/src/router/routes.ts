@@ -7,7 +7,7 @@ export const constantRoute = [
     name: 'login', // 命名路由,
     meta: {
       title: '登录', // 菜单标题
-      hidden: false, // 代表路由的标题在菜单中是否隐藏  true-隐藏  false-不隐藏
+      hidden: true, // 代表路由的标题在菜单中是否隐藏  true-隐藏  false-不隐藏
       icon: 'Promotion', // 菜单文字左侧图标，支持element-plus全部图标
     },
   },
@@ -31,15 +31,15 @@ export const constantRoute = [
           icon: 'HomeFilled',
         },
       },
-      {
-        path: '/ceshi',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '测试',
-          hidden: false,
-          icon: 'Histogram',
-        },
-      },
+      // {
+      //   path: '/ceshi',
+      //   component: () => import('@/views/home/index.vue'),
+      //   meta: {
+      //     title: '测试',
+      //     hidden: false,
+      //     icon: 'Histogram',
+      //   },
+      // },
     ],
   },
   {
@@ -49,7 +49,7 @@ export const constantRoute = [
     name: '404', // 命名路由
     meta: {
       title: '404',
-      hidden: false,
+      hidden: true,
       icon: 'DocumentDelete',
     },
   },
@@ -60,7 +60,7 @@ export const constantRoute = [
     name: 'Any',
     meta: {
       title: '任意路由',
-      hidden: false,
+      hidden: true,
       icon: 'DataLine',
     },
   },

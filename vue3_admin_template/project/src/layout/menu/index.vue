@@ -2,7 +2,11 @@
   <!-- <p>{{ menuList }}</p> -->
   <template v-for="(item, index) in menuList" :key="item.path">
     <!-- 没有子路由 -->
-    <el-menu-item v-if="!item.children && !item.meta.hidden" :index="item.path">
+    <el-menu-item
+      v-if="!item.children && !item.meta.hidden"
+      :index="item.path"
+      @click="goRoute"
+    >
       <template #title>
         <el-icon>
           <component :is="item.meta.icon"></component>
@@ -49,6 +53,10 @@
 <script setup lang="ts" name="">
 // 获取父组件传递过来的全部路由数据
 defineProps(['menuList'])
+// 点击菜单的回调
+const goRoute = (vc) => {
+  console.log(vc.index)
+}
 </script>
 <script lang="ts">
 export default {
