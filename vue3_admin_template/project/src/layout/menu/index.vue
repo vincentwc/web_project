@@ -4,7 +4,9 @@
     <!-- 没有子路由 -->
     <el-menu-item v-if="!item.children && !item.meta.hidden" :index="item.path">
       <template #title>
-        <span>标&nbsp;</span>
+        <el-icon>
+          <component :is="item.meta.icon"></component>
+        </el-icon>
         <span>{{ item.meta.title }}</span>
       </template>
     </el-menu-item>
@@ -18,6 +20,9 @@
       :index="item.children[0].path"
     >
       <template #title>
+        <el-icon>
+          <component :is="item.children[0].meta.icon"></component>
+        </el-icon>
         <span>{{ item.children[0].meta.title }}</span>
       </template>
     </el-menu-item>
@@ -31,6 +36,9 @@
       :index="item.path"
     >
       <template #title>
+        <el-icon>
+          <component :is="item.meta.icon"></component>
+        </el-icon>
         <span>{{ item.meta.title }}</span>
       </template>
       <!-- 递归组件 -->
@@ -44,6 +52,7 @@ defineProps(['menuList'])
 </script>
 <script lang="ts">
 export default {
+  // 递归组件需要名字
   name: 'Menu',
 }
 </script>
