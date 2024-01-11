@@ -22,6 +22,7 @@
         !item.children[0].meta.hidden
       "
       :index="item.children[0].path"
+      @click="goRoute"
     >
       <template #title>
         <el-icon>
@@ -51,11 +52,14 @@
   </template>
 </template>
 <script setup lang="ts" name="">
+import { useRouter } from 'vue-router'
 // 获取父组件传递过来的全部路由数据
 defineProps(['menuList'])
+let $router = useRouter()
 // 点击菜单的回调
-const goRoute = (vc) => {
-  console.log(vc.index)
+const goRoute = (vc: any) => {
+  // 路由跳转
+  $router.push(vc.index)
 }
 </script>
 <script lang="ts">

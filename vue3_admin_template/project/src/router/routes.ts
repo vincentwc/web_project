@@ -30,14 +30,6 @@ export const constantRoute = [
           icon: 'HomeFilled',
         },
       },
-      // {
-      //   path: '/ceshi',
-      //   component: () => import('@/views/home/index.vue'),
-      //   meta: {
-      //     title: '测试',
-      //     icon: 'Histogram',
-      //   },
-      // },
     ],
   },
   {
