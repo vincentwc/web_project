@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { de } from 'element-plus/es/locales.mjs'
+import useUserStore from '../store/modules/user'
 
 // 1. 利用axios对象的create方法，创建axios实例（其他的配置：基础路径，超时时间）
 let request = axios.create({
@@ -9,11 +10,15 @@ let request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径上会携带 /api
   timeout: 5000, // 请求超时时间
 })
+
 // 2. request实例添加请求与响应拦截器
 request.interceptors.request.use((config) => {
   // config配置对象，headers属性请求头，经常给服务器端携带公共参数
   // 返回配置对象
-  config.headers.token = '123'
+  let userStore = useUserStore()
+  if (userStore) {
+    config.headers.token = userStore.token
+  }
   return config
 })
 
