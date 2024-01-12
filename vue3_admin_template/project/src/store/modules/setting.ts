@@ -5,6 +5,7 @@ let useLayoutSettingStore = defineStore('SettingStore', {
   state: () => {
     return {
       fold: false, // 用于控制菜单折叠还是收起控制
+      refresh: false, // 用于控制页面右上角刷新效果
     }
   },
 })
