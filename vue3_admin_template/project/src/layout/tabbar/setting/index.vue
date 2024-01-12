@@ -1,6 +1,6 @@
 <template>
-  <el-button size="small" icon="Refresh" circle></el-button>
-  <el-button size="small" icon="FullScreen" circle></el-button>
+  <el-button size="small" icon="Refresh" @click="" circle></el-button>
+  <el-button size="small" icon="FullScreen" @click="" circle></el-button>
   <el-button size="small" icon="Setting" circle></el-button>
   <img
     src="../../../../public/logo.png"
@@ -22,4 +22,9 @@
   </el-dropdown>
 </template>
 <script setup lang="ts" name=""></script>
+<script lang="ts">
+export default {
+  name: 'Setting',
+}
+</script>
 <style scoped></style>

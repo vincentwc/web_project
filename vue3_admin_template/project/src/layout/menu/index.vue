@@ -7,12 +7,12 @@
       :index="item.path"
       @click="goRoute"
     >
-      <template #title>
+      <!-- <template #title> -->
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
         <span>{{ item.meta.title }}</span>
-      </template>
+      <!-- </template> -->
     </el-menu-item>
     <!-- 有子路由，但是只有一个子路由 -->
     <el-menu-item
@@ -24,12 +24,12 @@
       :index="item.children[0].path"
       @click="goRoute"
     >
-      <template #title>
+      <!-- <template #title> -->
         <el-icon>
           <component :is="item.children[0].meta.icon"></component>
         </el-icon>
         <span>{{ item.children[0].meta.title }}</span>
-      </template>
+      <!-- </template> -->
     </el-menu-item>
     <!-- 有子路由，且个数大于一个 -->
     <el-sub-menu

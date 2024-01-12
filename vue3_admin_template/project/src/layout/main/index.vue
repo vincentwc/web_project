@@ -10,6 +10,11 @@
   </div>
 </template>
 <script setup lang="ts" name=""></script>
+<script lang="ts">
+export default {
+  name: 'Main',
+}
+</script>
 <style scoped>
 .fade-enter-from {
   opacity: 0;
