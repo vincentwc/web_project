@@ -14,6 +14,9 @@ dependencies:
   element-plus:
     specifier: ^2.4.4
     version: 2.4.4(react@18.2.0)(vue@3.4.3)
+  nprogress:
+    specifier: ^0.2.0
+    version: 0.2.0
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.3.3)(vue@3.4.3)
@@ -4455,6 +4458,10 @@ packages:
     dependencies:
       path-key: 4.0.0
     dev: true
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha1-y480xTIT2JVyP8urkH6UIq28r7E=, tarball: http://npm.cestc.cn/nprogress/download/nprogress-0.2.0.tgz}
+    dev: false
 
   /nth-check@2.1.1:
     resolution: {integrity: sha1-yeq0KO/842zWuSySS9sADvHx7R0=, tarball: http://npm.cestc.cn/nth-check/download/nth-check-2.1.1.tgz}
