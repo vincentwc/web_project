@@ -4,14 +4,17 @@ import router from './router'
 import nprogress from 'nprogress'
 // 引入进度条样式
 import 'nprogress/nprogress.css'
+nprogress.configure({ showSpinner: false })
 import pinia from './store'
 // 获取用户相关的小仓库内部token数据，去判断用户是否登录成功
 import useUserStore from './store/modules/user'
+import setting from './setting'
 let userStore = useUserStore(pinia)
 
 // 全局守卫：项目中任意路由的切换都会触发的钩子
 // 全局前置守卫
 router.beforeEach(async (to: any, from: any, next: any) => {
+  document.title = `${setting.title} - ${to.meta.title}`
   // 访问某一个路由之前守卫
   // to:将要访问哪一个路由
   // from:从哪一个路由跳转
@@ -32,10 +35,16 @@ router.beforeEach(async (to: any, from: any, next: any) => {
       } else {
         // 没有用户信息，在守卫这里发请求获取到了用户信息在放行
         try {
+          // 获取用户信息
           await userStore.userInfo()
+          // 放行
           next()
         } catch (error) {
-          
+          // token过期，获取不到用户信息
+          // 用户手动修改本地存储的token
+          // 退出登录
+          userStore.userLogout()
+          next({ path: '/login', query: { redirect: to.path } })
         }
       }
     }

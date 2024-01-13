@@ -84,9 +84,9 @@ export default {
       }
     }
 
-    &.fold {
-      width: $base-menu-min-width;
-    }
+    // &.fold {
+    //   width: $base-menu-min-width;
+    // }
   }
 
   .layout_tabbar {
