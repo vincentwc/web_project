@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 // 引入数据类型
 import type {
-  loginFormdata,
+  loginFormData,
   loginResponseData,
   userInfoResponseData,
 } from '@/api/user/type'
@@ -28,7 +28,7 @@ let useUserStore = defineStore('User', {
   // 异步|逻辑的地方
   actions: {
     // 用户登录的方法
-    async userLogin(data: loginFormdata) {
+    async userLogin(data: loginFormData) {
       // 登陆请求
       let result: loginResponseData = await reqLogin(data)
 
