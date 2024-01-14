@@ -60,10 +60,10 @@ const fullScreen = () => {
 }
 
 // 退出登录点击回调
-const logout = () => {
+const logout = async () => {
   // 第一件事：向服务器发请求[退出登录接口]
   // 第二件事：仓库中关于用户的相关数据清空[token|username|avator]
-  userStore.userLogout()
+  await userStore.userLogout()
   // 第三件事：跳转到登录页面,并且把当前的路由信息当作参数传递，当前用户再次登陆的时候，直接跳转到退出前的页面
   $router.push({ path: '/login', query: { redirect: $route.path } })
 }

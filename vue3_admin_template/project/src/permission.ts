@@ -43,7 +43,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
           // token过期，获取不到用户信息
           // 用户手动修改本地存储的token
           // 退出登录
-          userStore.userLogout()
+          await userStore.userLogout()
           next({ path: '/login', query: { redirect: to.path } })
         }
       }
