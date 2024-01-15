@@ -74,17 +74,32 @@
     <el-dialog v-model="dialogFormVisible" title="添加品牌">
       <el-form style="width: 80%">
         <el-form-item label="品牌名称" label-width="90px">
-          <el-input placeholder="请输入品牌名称"></el-input>
+          <el-input
+            placeholder="请输入品牌名称"
+            v-model="trademarkParams.tmName"
+          ></el-input>
         </el-form-item>
         <el-form-item label="品牌LOGO" label-width="90px">
+          <!-- 
+            upload组件相应属性
+              action：上传图片请求地址 需要增加/api，代理服务器不发送post请求
+              show-file-list: 展示上传图片的名称
+              before-upload：文件上传之前的钩子
+              on-success：文件上传成功的钩子
+
+          -->
           <el-upload
             class="avatar-uploader"
-            action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+            action="/api/admin/product/fileUpload"
             :show-file-list="false"
-            :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
+            :on-success="handleAvatarSuccess"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img
+              v-if="trademarkParams.logoUrl"
+              :src="trademarkParams.logoUrl"
+              class="avatar"
+            />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
         </el-form-item>
@@ -100,10 +115,15 @@
   </div>
 </template>
 <script setup lang="ts" name="">
-import { ref, onMounted } from 'vue'
-import { reqHasTrademark } from '@/api/product/trademark'
+import { ref, onMounted, reactive } from 'vue'
+import {
+  reqHasTrademark,
+  reqAddOrUpdateTrademark,
+} from '@/api/product/trademark'
+import { ElMessage, type UploadProps } from 'element-plus'
 import type {
   Records,
+  TradeMark,
   TradeMarkResponseData,
 } from '@/api/product/trademark/type'
 // 当前页码
@@ -116,6 +136,11 @@ let total = ref<number>(0)
 let tradenarkArr = ref<Records>([])
 // 控制对话框显示｜隐藏
 let dialogFormVisible = ref(false)
+// 定义收集新增品牌数据
+let trademarkParams = reactive<TradeMark>({
+  tmName: '',
+  logoUrl: '',
+})
 // 获取已有品牌的接口封装成一个函数：在任何情况下调用次函数即可
 const getHasTrademark = async (pager = 1) => {
   pageNo.value = pager
@@ -138,6 +163,9 @@ onMounted(() => {
 const addTradeMark = () => {
   // 对话框显示
   dialogFormVisible.value = true
+  // 相应收集数据清空
+  trademarkParams.tmName = ''
+  trademarkParams.logoUrl = ''
 }
 
 const updateTradeMark = () => {
@@ -148,10 +176,61 @@ const updateTradeMark = () => {
 const cancel = () => {
   // 对话框隐藏
   dialogFormVisible.value = false
+  // 相应收集数据清空
+}
+// 对话框底部确定按钮
+const confirm = async () => {
+  dialogFormVisible.value = false
+  let result: any = await reqAddOrUpdateTrademark(trademarkParams)
+  if (result.code == 200) {
+    ElMessage({
+      type: 'success',
+      message: '添加品牌成功',
+    })
+    // 再次发请求获取全部已有品牌数据
+    getHasTrademark()
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '添加品牌失败',
+    })
+  }
 }
 
-const confirm = () => {
-  dialogFormVisible.value = false
+// 图片上传组件->上传图片之前触发的钩子函数
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  // 钩子是在图片上传成功之前触发，上传文件之前可以约束文件的类型和大小
+  // 要求：上传文件格式png|jpg|gif 4M
+  if (
+    rawFile.type == 'image/png' ||
+    rawFile.type == 'image/jpeg' ||
+    rawFile.type == 'image/gif'
+  ) {
+    if (rawFile.size / 1024 / 1024 < 4) {
+      return true
+    } else {
+      ElMessage({
+        type: 'error',
+        message: '上传的文件大小应小于4M',
+      })
+      return false
+    }
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '上传文件格式必须是PGN|JPG|GIF',
+    })
+    return false
+  }
+}
+
+// 图片上传组件->上传图片成功触发的钩子函数
+const handleAvatarSuccess: UploadProps['onSuccess'] = (
+  response,
+  uploadFile,
+) => {
+  // response 即为当前这次上次上传图片post请求服务器返回的数据
+  trademarkParams.logoUrl = response.data
 }
 </script>
 <style scoped>
