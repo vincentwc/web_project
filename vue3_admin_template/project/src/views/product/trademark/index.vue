@@ -71,22 +71,29 @@
       v-model：属性用于控制对话框的显示与隐藏 true-显示 false-隐藏
       title：设置对话框左上角标题
     -->
-    <el-dialog v-model="dialogFormVisible" title="添加品牌">
-      <el-form style="width: 80%">
-        <el-form-item label="品牌名称" label-width="90px">
+    <el-dialog
+      v-model="dialogFormVisible"
+      :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
+    >
+      <el-form
+        style="width: 80%"
+        :model="trademarkParams"
+        :rules="rules"
+        ref="formRef"
+      >
+        <el-form-item label="品牌名称" label-width="100px" prop="tmName">
           <el-input
             placeholder="请输入品牌名称"
             v-model="trademarkParams.tmName"
           ></el-input>
         </el-form-item>
-        <el-form-item label="品牌LOGO" label-width="90px">
+        <el-form-item label="品牌LOGO" label-width="100px" prop="logoUrl">
           <!-- 
             upload组件相应属性
               action：上传图片请求地址 需要增加/api，代理服务器不发送post请求
               show-file-list: 展示上传图片的名称
               before-upload：文件上传之前的钩子
               on-success：文件上传成功的钩子
-
           -->
           <el-upload
             class="avatar-uploader"
@@ -115,7 +122,7 @@
   </div>
 </template>
 <script setup lang="ts" name="">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, nextTnextTick, nextTick } from 'vue'
 import {
   reqHasTrademark,
   reqAddOrUpdateTrademark,
@@ -141,6 +148,8 @@ let trademarkParams = reactive<TradeMark>({
   tmName: '',
   logoUrl: '',
 })
+// 获取el-form组件实例
+let formRef = ref()
 // 获取已有品牌的接口封装成一个函数：在任何情况下调用次函数即可
 const getHasTrademark = async (pager = 1) => {
   pageNo.value = pager
@@ -164,14 +173,31 @@ const addTradeMark = () => {
   // 对话框显示
   dialogFormVisible.value = true
   // 相应收集数据清空
+  trademarkParams.id = 0
   trademarkParams.tmName = ''
   trademarkParams.logoUrl = ''
+  // 第一种写法：ts的问号语法
+  // formRef.value?.clearValidate('tmName')
+  // formRef.value?.clearValidate('logoUrl')
+  // 第二种写法
+  nextTick(() => {
+    formRef.value?.clearValidate('tmName')
+    formRef.value?.clearValidate('logoUrl')
+  })
 }
 
-const updateTradeMark = (row: any) => {
-  console.log(row)
-
+const updateTradeMark = (row: TradeMark) => {
+  // 情况校验规则错误提示信息
+  nextTick(() => {
+    formRef.value?.clearValidate('tmName')
+    formRef.value?.clearValidate('logoUrl')
+  })
   dialogFormVisible.value = true
+  // ES6语法合并对象,跟下面三行代码等效
+  Object.assign(trademarkParams, row)
+  // trademarkParams.tmName = row.tmName
+  // trademarkParams.logoUrl = row.logoUrl
+  // trademarkParams.id = row.id
 }
 
 // 对话框底部取消按钮
@@ -182,21 +208,24 @@ const cancel = () => {
 }
 // 对话框底部确定按钮
 const confirm = async () => {
-  dialogFormVisible.value = false
+  // 在发请求之前，对整个表单进行校验
+  // 调用这个方法进行全部的表单校验，如果校验全部通过，在执行后面的语法
+  await formRef.value.validate()
   let result: any = await reqAddOrUpdateTrademark(trademarkParams)
   if (result.code == 200) {
     ElMessage({
       type: 'success',
-      message: '添加品牌成功',
+      message: trademarkParams.id ? '修改品牌成功' : '添加品牌成功',
     })
-    // 再次发请求获取全部已有品牌数据
-    getHasTrademark()
+    // 再次发请求获取全部已有品牌数据,添加跳转到第一页，修改留在当前页
+    getHasTrademark(trademarkParams.id ? pageNo.value : 1)
   } else {
     ElMessage({
       type: 'error',
-      message: '添加品牌失败',
+      message: trademarkParams.id ? '修改品牌失败' : '添加品牌失败',
     })
   }
+  dialogFormVisible.value = false
 }
 
 // 图片上传组件->上传图片之前触发的钩子函数
@@ -229,10 +258,47 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
 // 图片上传组件->上传图片成功触发的钩子函数
 const handleAvatarSuccess: UploadProps['onSuccess'] = (
   response,
-  uploadFile,
+  _uploadFile,
 ) => {
   // response 即为当前这次上次上传图片post请求服务器返回的数据
   trademarkParams.logoUrl = response.data
+  // 文件上传成功之后，清理掉logoUrl的错误提示信息
+  formRef.value.clearValidate('logoUrl')
+}
+
+// 品牌校验自定义校验规则方法
+const validatorTmName = (_rule: any, value: any, callback: any) => {
+  /**
+   * _rule: 规则对象
+   * value：文本内容
+   * callback：校验放行函数
+   */
+  // 自定义校验规则
+  if (value.trim().length >= 2) {
+    callback()
+  } else {
+    // 校验未通过，返回的错误提示信息
+    callback(new Error('品牌名称位数大于等于两位'))
+  }
+}
+
+// 品牌LOGO图片自定义校验规则
+const validatorLogoUrl = (_rule: any, value: any, callback: any) => {
+  // 如果图片上传
+  if (value) {
+    callback()
+  } else {
+    callback(new Error('LOGO图片务必上传'))
+  }
+}
+// 表单校验规则对象
+const rules = {
+  tmName: [
+    // required：这个字段需要校验，表单项前面加一个五角星
+    // trigger ：触发规则的时机 blur失去焦点 change改变
+    { required: true, trigger: 'blur', validator: validatorTmName },
+  ],
+  logoUrl: [{ required: true, trigger: 'blur', validator: validatorLogoUrl }],
 }
 </script>
 <style scoped>
