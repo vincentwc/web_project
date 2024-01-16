@@ -15,7 +15,7 @@ import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import { constantRoute } from '@/router/routes'
 
 // 创建用户小仓库
-let useUserStore = defineStore('User', {
+const useUserStore = defineStore('User', {
   // 小仓库存储数据的地方
   state: (): UserState => {
     return {
@@ -30,7 +30,7 @@ let useUserStore = defineStore('User', {
     // 用户登录的方法
     async userLogin(data: loginFormData) {
       // 登陆请求
-      let result: loginResponseData = await reqLogin(data)
+      const result: loginResponseData = await reqLogin(data)
 
       // 登录请求：成功200->token
       // 登录请求：失败201->登录失败错误信息
