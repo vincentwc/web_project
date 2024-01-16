@@ -39,7 +39,7 @@
               type="warning"
               icon="Edit"
               size="small"
-              @click="updateTradeMark"
+              @click="updateTradeMark(row)"
             />
             <el-button type="danger" icon="Delete" size="small" />
           </template>
@@ -168,7 +168,9 @@ const addTradeMark = () => {
   trademarkParams.logoUrl = ''
 }
 
-const updateTradeMark = () => {
+const updateTradeMark = (row: any) => {
+  console.log(row)
+
   dialogFormVisible.value = true
 }
 
