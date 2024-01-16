@@ -122,7 +122,7 @@
   </div>
 </template>
 <script setup lang="ts" name="">
-import { ref, onMounted, reactive, nextTnextTick, nextTick } from 'vue'
+import { ref, onMounted, reactive, nextTick } from 'vue'
 import {
   reqHasTrademark,
   reqAddOrUpdateTrademark,
