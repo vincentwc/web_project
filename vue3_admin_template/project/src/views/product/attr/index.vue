@@ -86,6 +86,7 @@
             <!-- row 即为当前的属性值对象 -->
             <template #="{ row, $index }">
               <el-input
+                :ref="(vc: any) => (inputArr[$index] = vc)"
                 v-if="row.flag"
                 placeholder="请你输入属性值名称"
                 v-model="row.valueName"
@@ -113,7 +114,7 @@
 </template>
 <script setup lang="ts" name="">
 // 组合式api函数的watch
-import { watch, ref, reactive } from 'vue'
+import { watch, ref, reactive, nextTick } from 'vue'
 // 引入获取已有属性与属性值接口
 import { reqAttr, reqAddOrUpdateAttr } from '@/api/product/attr'
 // 获取分类的仓库
@@ -132,6 +133,8 @@ let attrParams = reactive<Attr>({
   categoryId: '', // 三级分类id
   categoryLevel: 3, // 表示三级分类
 })
+//准备一个数组:将来存储对应的组件实例el-input
+let inputArr = ref<any>([])
 // 监听仓库三级分类id变化
 watch(
   () => categoryStore.c3Id,
@@ -185,6 +188,10 @@ const addAttrValue = () => {
   attrParams.attrValueList.push({
     valueName: '',
     flag: true, // 控制每一个属性值编辑模式与查看模式的切换
+  })
+  // 获取最后的el-input组件聚焦
+  nextTick(() => {
+    inputArr.value[attrParams.attrValueList.length - 1].focus()
   })
 }
 
@@ -240,8 +247,12 @@ const toLook = (row: AttrValue, $index: number) => {
   row.flag = false
 }
 
-const toEdit = (row: AttrValue) => {
+const toEdit = (row: AttrValue, $index: number) => {
   row.flag = true
+  // nextTick:响应式数据发生变化，获取更新的dom实例
+  nextTick(() => {
+    console.log(inputArr.value[$index])
+  })
 }
 </script>
 <style scoped></style>
