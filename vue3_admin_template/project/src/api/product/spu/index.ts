@@ -38,7 +38,7 @@ export const reqAllTrademark = () => {
 }
 
 // 获取某一个已有的spu全部商品的图片地址
-export const reqSkuImageList = (spuId: number) => {
+export const reqSpuImageList = (spuId: number) => {
   return request.get<any, SpuHasImg>(API.IMAGE_URL + spuId)
 }
 

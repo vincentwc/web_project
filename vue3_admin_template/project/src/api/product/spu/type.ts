@@ -47,7 +47,7 @@ export interface AllTradeMark extends ResponseData {
 }
 
 // 商品图片ts类型
-export interface SpuImage {
+export interface SpuImg {
   id: number
   createTime: string
   updateTime: string
@@ -58,7 +58,7 @@ export interface SpuImage {
 
 // 已有的spu的照片墙数据的类型
 export interface SpuHasImg extends ResponseData {
-  data: SpuImage[]
+  data: SpuImg[]
 }
 
 // 已有的销售属性值对象ts类型
@@ -88,7 +88,7 @@ export interface SaleAttr {
 }
 
 // spu已有的销售属性接口返回的数据ts类型
-export interface SaleAttrResponse extends ResponseData {
+export interface SaleAttrResponseData extends ResponseData {
   data: SaleAttr[]
 }
 
@@ -98,6 +98,6 @@ export interface HasSaleAttr {
   name: string
 }
 
-export interface HasSaleAttrResponseDAta extends ResponseData {
+export interface HasSaleAttrResponseData extends ResponseData {
   data: HasSaleAttr[]
 }
