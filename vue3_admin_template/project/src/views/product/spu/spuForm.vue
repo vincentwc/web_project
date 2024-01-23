@@ -10,21 +10,37 @@
       </el-select>
     </el-form-item>
     <el-form-item label="SPU描述">
-      <el-input type="textarea" placeholder="请你输入描述"></el-input>
+      <el-input
+        type="textarea"
+        placeholder="请你输入描述"
+        v-model="SpuParams.description"
+      ></el-input>
     </el-form-item>
     <el-form-item label="SPU图片">
+      <!-- 
+        v-model:file-list 用于展示默认图片
+        list-type:文件列表类型
+        on-preview：点击文件列表中已上传的文件时的钩子  
+        on-remove：文件列表移除文件时的钩子
+       -->
       <el-upload
-        v-model:file-list="fileList"
-        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        v-model:file-list="imageList"
+        action="/api/admin/product/fileUpload"
         list-type="picture-card"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove"
+        :before-upload="handleUpload"
       >
         <el-icon><Plus /></el-icon>
       </el-upload>
 
       <el-dialog v-model="dialogVisible">
-        <img w-full :src="dialogImageUrl" alt="Preview Image" />
+        <img
+          w-full
+          :src="dialogImageUrl"
+          alt="Preview Image"
+          style="width: 100%; height: 100%"
+        />
       </el-dialog>
     </el-form-item>
     <el-form-item label="SPU销售属性">
@@ -86,8 +102,23 @@ let imageList = ref<SpuImg[]>([])
 let saleAttr = ref<SaleAttr[]>([])
 // 全部的销售属性
 let allSaleAttr = ref<HasSaleAttr[]>([])
+// 控制对话框的显示与隐藏
+let dialogVisible = ref<boolean>(false)
+// 存储预览图片地址
+let dialogImageUrl = ref<string>()
+// 存储已有的spu对象
+let SpuParams = ref<SpuData>({
+  spuName: '', // spu名称
+  description: '', // spu描述
+  category3Id: '', // 三级分类的id
+  tmId: '',
+  spuSaleAttrList: null,
+  spuImageList: null,
+})
 // 子组件写一个方法
 const initHasSpuData = async (spu: SpuData) => {
+  // 存储已有的spu对象，将来在模板中展示
+  SpuParams.value = spu
   //spu:计委父组件传递过来的已有的spu对象【不完整】
   // 获取全部品牌的数据
   let result: AllTradeMark = await reqAllTrademark()
@@ -100,14 +131,48 @@ const initHasSpuData = async (spu: SpuData) => {
 
   // 存储全部品牌数据
   AllTrademark.value = result.data
-  // spu全部品牌数据
-  imageList.value = result1.data
-  //
+  // spu全部照片数据
+  imageList.value = result1.data.map((item) => {
+    return {
+      name: item.imgName,
+      url: item.imgUrl,
+    }
+  })
+  // 存储已有的品牌数据
   saleAttr.value = result2.data
   // 所有销售属性
   allSaleAttr.value = result3.data
 }
 
+// 照片墙点击预览按钮时触发的钩子
+const handlePictureCardPreview = (file: any) => {
+  dialogImageUrl.value = file.url
+  dialogVisible.value = true
+}
+
+// 照片墙上传成功之前的钩子，约束文件的大小与类型
+const handleUpload = (file: any) => {
+  if (
+    file.type == 'image/png' ||
+    file.type == 'image/jpeg' ||
+    file.type == 'image/gif'
+  ) {
+    if(file.size/1024/1024 < 3) {
+
+      return true
+    } else {
+
+      return false
+    }
+  } else {
+    return false
+  }
+}
+
+// 照片墙删除图片的钩子
+const handleRemove = (file: any) => {
+  console.log(file)
+}
 // 对外暴露
 defineExpose({ initHasSpuData })
 </script>
