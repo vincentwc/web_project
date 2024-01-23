@@ -45,23 +45,68 @@
     </el-form-item>
     <el-form-item label="SPU销售属性">
       <!-- 展示销售属性的下拉菜单 -->
-      <el-select>
-        <el-option label="苹果"></el-option>
-        <el-option label="小米"></el-option>
+      <el-select
+        v-model="saleAttrIdAndValueName"
+        :placeholder="
+          unSelectSaleAttr.length
+            ? `还未选择${unSelectSaleAttr.length}个`
+            : '无'
+        "
+      >
+        <el-option
+          v-for="(item, index) in unSelectSaleAttr"
+          :key="item.id"
+          :label="item.name"
+          :value="`${item.id}:${item.name}`"
+        ></el-option>
       </el-select>
-      <el-button type="primary" icon="Plus" style="margin-left: 10px">
-        添加销售属性值
+      <el-button
+        type="primary"
+        icon="Plus"
+        style="margin-left: 10px"
+        :disabled="saleAttrIdAndValueName ? false : true"
+        @click="addSaleAttr"
+      >
+        添加属性
       </el-button>
       <!-- table 展示销售属性与属性值的地方 -->
-      <el-table border style="margin: 10px 0px">
+      <el-table border style="margin: 10px 0px" :data="saleAttr">
         <el-table-column
           label="序号"
           type="index"
           align="center"
           width="80px"
         ></el-table-column>
-        <el-table-column label="销售属性名字" width="120px"></el-table-column>
-        <el-table-column label="销售属性值"></el-table-column>
+        <el-table-column
+          label="销售属性名字"
+          width="120px"
+          prop="saleAttrName"
+        ></el-table-column>
+        <el-table-column label="销售属性值">
+          <!-- row即为当前spu已有属性对象 -->
+          <template #="{ row, $index }">
+            <el-tag
+              style="margin: 0px 5px"
+              v-for="(item, index) in row.spuSaleAttrValueList"
+              :key="item.id"
+              class="mx-1"
+              closable
+            >
+              {{ item.saleAttrValueName }}
+            </el-tag>
+            <el-button type="primary" size="small" icon="Plus"></el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="120px">
+          <template #="{ row, $index }">
+            <el-button
+              type="danger"
+              size="small"
+              icon="Delete"
+              @click="saleAttr.splice($index, 1)"
+            ></el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-form-item>
     <el-form-item>
@@ -88,7 +133,8 @@ import type {
   SpuHasImg,
   Trademark,
 } from '@/api/product/spu/type'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { ElMessage } from 'element-plus'
 let $emit = defineEmits(['changeScene'])
 // 子组件点击取消按钮，通知父组件切换场景为1，展示已有的spu数据
 const cancel = () => {
@@ -115,6 +161,8 @@ let SpuParams = ref<SpuData>({
   spuSaleAttrList: null,
   spuImageList: null,
 })
+// 将来收集还未选择的销售属性的id与属性名字
+let saleAttrIdAndValueName = ref<string>('')
 // 子组件写一个方法
 const initHasSpuData = async (spu: SpuData) => {
   // 存储已有的spu对象，将来在模板中展示
@@ -157,22 +205,55 @@ const handleUpload = (file: any) => {
     file.type == 'image/jpeg' ||
     file.type == 'image/gif'
   ) {
-    if(file.size/1024/1024 < 3) {
-
+    if (file.size / 1024 / 1024 < 3) {
       return true
     } else {
-
+      ElMessage({
+        type: 'error',
+        message: '上传文件必须小于3M',
+      })
       return false
     }
   } else {
+    ElMessage({
+      type: 'error',
+      message: '上传文件必须是PNG|JPG|GIF',
+    })
     return false
   }
 }
 
-// 照片墙删除图片的钩子
-const handleRemove = (file: any) => {
-  console.log(file)
+// 计算当前spu还未拥有的销售属性
+let unSelectSaleAttr = computed(() => {
+  // 全部的销售属性：颜色、版本、尺码
+  let unSelectArr = allSaleAttr.value.filter((item) => {
+    return saleAttr.value.every((item1) => {
+      return item.name != item1.saleAttrName
+    })
+  })
+  return unSelectArr
+})
+
+// 添加销售属性的方法
+const addSaleAttr = () => {
+  /**
+   * baseSaleAttrId
+   * saleAttrName
+   * spuSaleAttrValueList
+   */
+  const [baseSaleAttrId, saleAttrName] = saleAttrIdAndValueName.value.split(':')
+  // 准备一个新的销售属性对象，将来带给服务器即可
+  let newSaleAttr: SaleAttr = {
+    baseSaleAttrId,
+    saleAttrName,
+    spuSaleAttrValueList: [],
+  }
+  // 追加到数组当中
+  saleAttr.value.push(newSaleAttr)
+  // 清空收集的数据
+  saleAttrIdAndValueName.value = ''
 }
+
 // 对外暴露
 defineExpose({ initHasSpuData })
 </script>
