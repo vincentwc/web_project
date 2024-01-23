@@ -5,6 +5,7 @@ import type {
   HasSaleAttrResponseData,
   HasSpuResponseData,
   SaleAttrResponseData,
+  SpuData,
   SpuHasImg,
 } from './type'
 
@@ -57,7 +58,7 @@ export const reqAllSaleAttr = () => {
 }
 
 // 添加一个新的spu
-export const reqAddOrUpdateSpu = (data: any) => {
+export const reqAddOrUpdateSpu = (data: SpuData) => {
   if (data.id) {
     // 更新已有的spu
     return request.post<any, any>(API.UPDATESPU_URL, data)
